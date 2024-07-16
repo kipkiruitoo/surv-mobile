@@ -45,8 +45,8 @@ class SurveyBuilder {
 
     List<RPStep> surveytasks = [];
     int i = 0;
-    RPTextAnswerFormat textAnswerFormat =
-        RPTextAnswerFormat(hintText: "Write your answer here");
+    // RPTextAnswerFormat textAnswerFormat =
+    //     RPTextAnswerFormat(hintText: "Write your answer here");
 
     RPCompletionStep completionStep = RPCompletionStep(
         identifier: "completionID",
@@ -55,14 +55,56 @@ class SurveyBuilder {
 
     for (Question question in questions) {
       // will transllate different question types here
-      RPQuestionStep surveytask = RPQuestionStep(
-          identifier: 'q${i.toString()}ID',
-          title: question.title,
-          answerFormat: textAnswerFormat,
-          optional: false);
+      if (question.type == "checkbox") {
+        // choices
+        List<RPChoice> choices = question.choices
+            .map((choice) =>
+                RPChoice(text: choice.text, value: int.parse(choice.value)))
+            .toList();
+
+        RPChoiceAnswerFormat checkboxAnswerformat = RPChoiceAnswerFormat(
+            answerStyle: RPChoiceAnswerStyle.MultipleChoice, choices: choices);
+        RPQuestionStep surveytask = RPQuestionStep(
+            identifier: 'q${i.toString()}ID',
+            title: question.title,
+            answerFormat: checkboxAnswerformat,
+            optional: false);
+
+        surveytasks.add(surveytask);
+      } else if (question.type == "rating") {
+        RPAnswerFormat ratingAnswerFormat = RPSliderAnswerFormat(
+          minValue: 1,
+          maxValue: 5,
+          divisions: 4,
+          // prefix: "Extremely Dissatisfied",
+          // suffix: "Extremely Satisfied"
+        );
+
+        RPQuestionStep surveytask = RPQuestionStep(
+            identifier: 'q${i.toString()}ID',
+            title: question.title,
+            answerFormat: ratingAnswerFormat,
+            optional: false);
+
+        surveytasks.add(surveytask);
+      } else if (question.type == "radiogroup") {
+        List<RPChoice> choices = question.choices
+            .map((choice) =>
+                RPChoice(text: choice.text, value: int.parse(choice.value)))
+            .toList();
+
+        RPChoiceAnswerFormat radioAnswerformat = RPChoiceAnswerFormat(
+            answerStyle: RPChoiceAnswerStyle.SingleChoice, choices: choices);
+        RPQuestionStep surveytask = RPQuestionStep(
+            identifier: 'q${i.toString()}ID',
+            title: question.title,
+            answerFormat: radioAnswerformat,
+            optional: false);
+
+        surveytasks.add(surveytask);
+      }
 
       // print(surveytask.identifier);
-      surveytasks.add(surveytask);
 
       i++;
     }
@@ -102,11 +144,14 @@ class SurveyBuilder {
 
         // print(title.runtimeType);
         Question question;
-        if (element['type'] == 'radiogroup') {
+        if (element['type'] == 'radiogroup' ||
+            // element['type'] == 'tagbox' ||
+            element['type'] == 'checkbox' ||
+            element['type'] == 'dropdown') {
           for (var item in element['choices']) {
             print(item);
             Choice choice =
-                new Choice(value: item['value'], text: item['text'][0]);
+                new Choice(value: item['value'], text: item['text']);
             choices.add(choice);
           }
           question = new Question(
