@@ -1,0 +1,989 @@
+{
+    "pages": [
+        {
+            "name": "Introduction",
+            "elements": [
+                {
+                    "type": "checkbox",
+                    "name": "Q_1",
+                    "title": "Did you do any of the following on this date?",
+                    "isRequired": true,
+                    "choices": [
+                        {
+                            "value": "1",
+                            "text": "Listen to Radio"
+                        },
+                        {
+                            "value": "2",
+                            "text": "Watch Television"
+                        },
+                        {
+                            "value": "3",
+                            "text": "Read newspaper"
+                        },
+                        {
+                            "value": "4",
+                            "text": "Read magazine"
+                        },
+                        {
+                            "value": "5",
+                            "text": "Use the internet"
+                        }
+                    ],
+                    "hasNone": true
+                }
+            ]
+        },
+        {
+            "name": "Radio",
+            "elements": [
+                {
+                    "type": "matrixdynamic",
+                    "name": "Q_2",
+                    "visibleIf": "{Q_1} contains \"1\"",
+                    "title": "Which Radio station(s) did you listen to for at least 5 minutes?",
+                    "isRequired": true,
+                    "columns": [
+                        {
+                            "name": "Station",
+                            "cellType": "tagbox",
+                            "choicesByUrl": {
+                                "url": "/api/media/1",
+                                "path": "data",
+                                "valueName": "name",
+                                "titleName": "name"
+                            }
+                        },
+                        {
+                            "name": "TimeSlots",
+                            "cellType": "tagbox",
+                            "choices": [
+                                "00:00:00 - 00:29:59",
+                                "00:30:00 - 00:59:59",
+                                "01:00:00 - 01:29:59",
+                                "01:30:00 - 01:59:59",
+                                "02:00:00 - 02:29:59",
+                                "02:30:00 - 02:59:59",
+                                "03:00:00 - 03:29:59",
+                                "03:30:00 - 03:59:59",
+                                "04:00:00 - 04:29:59",
+                                "04:30:00 - 04:59:59",
+                                "05:00:00 - 05:29:59",
+                                "05:30:00 - 05:59:59",
+                                "06:00:00 - 06:29:59"
+                            ]
+                        }
+                    ],
+                    "choices": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ],
+                    "columnMinWidth": "100px",
+                    "rowCount": 1,
+                    "addRowLocation": "bottom",
+                    "addRowText": "Add station",
+                    "removeRowText": "Remove station"
+                },
+                {
+                    "type": "tagbox",
+                    "name": "Q_ 3",
+                    "title": "Where did you listen to the Radio?",
+                    "choices": [
+                        "At own home",
+                        "At someone else's household",
+                        "in car -private",
+                        "Bus / Taxi /Matatu",
+                        "Office/ Place of Work",
+                        "Bar / Restaurant / Hotel",
+                        "Hospital",
+                        "School / College",
+                        "Salon / Barbershop",
+                        "Banking Hall",
+                        "Supermarket / Grocery Store / Shop",
+                        "On the Move"
+                    ]
+                },
+                {
+                    "type": "tagbox",
+                    "name": "Q_4",
+                    "title": "Which RADIO do you consider being your most favorite or the one you listen to most often? ONE RESPONSE?",
+                    "choices": [
+                        "Item 1",
+                        "Item 2",
+                        "Item 3"
+                    ],
+                    "choicesByUrl": {
+                        "url": "/api/media/1",
+                        "path": "data",
+                        "valueName": "id",
+                        "titleName": "name"
+                    }
+                },
+                {
+                    "type": "rating",
+                    "name": "Q_5",
+                    "title": "How satisfied are you with the CONTENTS available on Radio?. ?",
+                    "rateValues": [
+                        {
+                            "value": "1",
+                            "text": "Extremely Dissatisfied"
+                        },
+                        {
+                            "value": "2",
+                            "text": "Disatisfied"
+                        },
+                        {
+                            "value": "3",
+                            "text": "Neither Nor"
+                        },
+                        {
+                            "value": "4",
+                            "text": "Satisfied"
+                        },
+                        {
+                            "value": "5",
+                            "text": "Extremely Satisfied"
+                        }
+                    ]
+                }
+            ],
+            "visibleIf": "{Q_1} contains \"1\""
+        },
+        {
+            "name": "TV",
+            "elements": [
+                {
+                    "type": "matrixdynamic",
+                    "name": "Q_6",
+                    "title": "Which Tv station(s) did you listen to for at least 5 minutes?",
+                    "isRequired": true,
+                    "columns": [
+                        {
+                            "name": "Station",
+                            "cellType": "tagbox",
+                            "choicesByUrl": {
+                                "url": "/api/media/2",
+                                "path": "data",
+                                "valueName": "name",
+                                "titleName": "name"
+                            }
+                        },
+                        {
+                            "name": "TimeSlots",
+                            "cellType": "tagbox",
+                            "choices": [
+                                "00:00:00 - 00:29:59",
+                                "00:30:00 - 00:59:59",
+                                "01:00:00 - 01:29:59",
+                                "01:30:00 - 01:59:59",
+                                "02:00:00 - 02:29:59",
+                                "02:30:00 - 02:59:59",
+                                "03:00:00 - 03:29:59",
+                                "03:30:00 - 03:59:59",
+                                "04:00:00 - 04:29:59",
+                                "04:30:00 - 04:59:59",
+                                "05:00:00 - 05:29:59",
+                                "05:30:00 - 05:59:59",
+                                "06:00:00 - 06:29:59"
+                            ]
+                        }
+                    ],
+                    "choices": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ],
+                    "columnMinWidth": "100px",
+                    "rowCount": 1,
+                    "addRowLocation": "bottom",
+                    "addRowText": "Add station",
+                    "removeRowText": "Remove station"
+                },
+                {
+                    "type": "tagbox",
+                    "name": "Q_7",
+                    "title": "Where did you watch TV?",
+                    "isRequired": true,
+                    "choices": [
+                        "At own home",
+                        "At someone else's household",
+                        "in car -private",
+                        "Bus / Taxi /Matatu",
+                        "Office/ Place of Work",
+                        "Bar / Restaurant / Hotel",
+                        "Hospital",
+                        "School / College",
+                        "Salon / Barbershop",
+                        "Banking Hall",
+                        "Supermarket / Grocery Store / Shop",
+                        "On the Move"
+                    ]
+                },
+                {
+                    "type": "tagbox",
+                    "name": "Q_8",
+                    "title": "Which TV STATION do you consider being your most favorite or the one you watch most often? ONE RESPONSE?",
+                    "isRequired": true,
+                    "choicesByUrl": {
+                        "url": "/api/media/2",
+                        "path": "data",
+                        "valueName": "id",
+                        "titleName": "name"
+                    }
+                },
+                {
+                    "type": "tagbox",
+                    "name": "Q_9",
+                    "title": "Tell me all the ways in which you have watched TV…? Was it ….?",
+                    "isRequired": true,
+                    "choices": [
+                        "Through a mobile Phone",
+                        "Online via a laptop or desktop computer",
+                        "Online via a tablet",
+                        "Through a tv set",
+                        "Onine via a game console"
+                    ]
+                },
+                {
+                    "type": "rating",
+                    "name": "Q_10",
+                    "title": "How satisfied are you with the CONTENTS available on TV?. ?",
+                    "isRequired": true,
+                    "rateValues": [
+                        {
+                            "value": "1",
+                            "text": "Extremely Dissatisfied"
+                        },
+                        {
+                            "value": "2",
+                            "text": "Disatisfied"
+                        },
+                        {
+                            "value": "3",
+                            "text": "Neither Nor"
+                        },
+                        {
+                            "value": "4",
+                            "text": "Satisfied"
+                        },
+                        {
+                            "value": "5",
+                            "text": "Extremely Satisfied"
+                        }
+                    ]
+                }
+            ],
+            "visibleIf": "{Q_1} contains \"2\""
+        },
+        {
+            "name": "Newspaper",
+            "elements": [
+                {
+                    "type": "matrixdynamic",
+                    "name": "Q_11",
+                    "title": "Which newspapers did you read or page through??",
+                    "isRequired": true,
+                    "columns": [
+                        {
+                            "name": "Newspaper",
+                            "cellType": "tagbox",
+                            "choicesByUrl": {
+                                "url": "/api/media/3",
+                                "path": "data",
+                                "valueName": "id",
+                                "titleName": "name"
+                            }
+                        },
+                        {
+                            "name": "BUSINESS/FINANCE",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "CLASSIFIED",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "CROSSWORD PUZZLES",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "EDITORIAL/COMMENTARY",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "GOSSIP",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "INTERNATIONAL NEWS",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "JOBS",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "LIFESTYLE",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "LOCAL NEWS",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "MAGAZINE INSERTS",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "OBITUARIES",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "RELATIONSHIP",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "SPORTS",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "TV/RADIO PROGRAM GUIDE",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "REVIVAL NEWS",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "REAL TALK",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        }
+                    ],
+                    "columnLayout": "vertical",
+                    "choices": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ],
+                    "rowCount": 1,
+                    "confirmDelete": true,
+                    "addRowText": "Add Newspaper",
+                    "removeRowText": "Remove Newspaper"
+                }
+            ],
+            "visibleIf": "{Q_1} contains \"3\""
+        },
+        {
+            "name": "Magazines",
+            "elements": [
+                {
+                    "type": "matrixdynamic",
+                    "name": "Q_12",
+                    "title": "Which Magazines did you read or page through??",
+                    "isRequired": true,
+                    "columns": [
+                        {
+                            "name": "Magazine",
+                            "cellType": "tagbox",
+                            "choicesByUrl": {
+                                "url": "/api/media/5",
+                                "path": "data",
+                                "valueName": "id",
+                                "titleName": "name"
+                            }
+                        },
+                        {
+                            "name": "BUSINESS/FINANCE",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "CLASSIFIED",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "CROSSWORD PUZZLES",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "EDITORIAL/COMMENTARY",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "GOSSIP",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "INTERNATIONAL NEWS",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "JOBS",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "LIFESTYLE",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "LOCAL NEWS",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "MAGAZINE INSERTS",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "OBITUARIES",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "RELATIONSHIP",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "SPORTS",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "TV/RADIO PROGRAM GUIDE",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "REVIVAL NEWS",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "REAL TALK",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        }
+                    ],
+                    "columnLayout": "vertical",
+                    "horizontalScroll": true,
+                    "choices": [
+                        1,
+                        2,
+                        3,
+                        4,
+                        5
+                    ],
+                    "rowCount": 1,
+                    "confirmDelete": true,
+                    "addRowText": "Add Newspaper",
+                    "removeRowText": "Remove Newspaper"
+                }
+            ],
+            "visibleIf": "{Q_1} contains \"4\""
+        },
+        {
+            "name": "Internet",
+            "elements": [
+                {
+                    "type": "matrixdynamic",
+                    "name": "Q_13",
+                    "title": "Which websites/applications did you access?  And which devices did you use to access the websites?",
+                    "isRequired": true,
+                    "columns": [
+                        {
+                            "name": "Website",
+                            "cellType": "tagbox",
+                            "choicesByUrl": {
+                                "url": "/api/media/4",
+                                "path": "data",
+                                "valueName": "id",
+                                "titleName": "name"
+                            }
+                        },
+                        {
+                            "name": "Device",
+                            "cellType": "tagbox",
+                            "choices": [
+                                "Mobile Phone",
+                                "Tablet/ ipad",
+                                "Desktop",
+                                "Laptop",
+                                "Smar Tv",
+                                "iPod",
+                                "Mp3 Player",
+                                "Kindle",
+                                "Others (Specify)"
+                            ]
+                        },
+                        {
+                            "name": "Less Than  1 minute",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "1 to 5 minutes",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "5t o 15 minutes",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "15 to 30 mi51515",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "30 minutes to 1 hour",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "1 to 2 hours",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "2 to 3 hours",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "3 to 4 hours",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        },
+                        {
+                            "name": "more than 4 hours",
+                            "cellType": "checkbox",
+                            "choices": [
+                                {
+                                    "value": "1",
+                                    "text": "Yes"
+                                }
+                            ]
+                        }
+                    ],
+                    "choices": [
+                        "Mobile Phone",
+                        "Tablet/ ipad",
+                        "Desktop",
+                        "Laptop",
+                        "Smar Tv",
+                        "iPod",
+                        "Mp3 Player",
+                        "Kindle",
+                        "Others (Specify)"
+                    ],
+                    "rowCount": 1
+                }
+            ],
+            "visibleIf": "{Q_1} contains \"5\""
+        },
+        {
+            "name": "Set Top Box",
+            "elements": [
+                {
+                    "type": "dropdown",
+                    "name": "question 14",
+                    "title": "Do you own a tv set?",
+                    "isRequired": true,
+                    "choices": [
+                        {
+                            "value": "1",
+                            "text": "Yes"
+                        },
+                        {
+                            "value": "0",
+                            "text": "No"
+                        }
+                    ]
+                },
+                {
+                    "type": "dropdown",
+                    "name": "question 15",
+                    "visibleIf": "{question 14} = \"1\"",
+                    "title": "Do you have a set top box in your home to watch television?",
+                    "isRequired": true,
+                    "choices": [
+                        {
+                            "value": "1",
+                            "text": "Yes"
+                        },
+                        {
+                            "value": "0",
+                            "text": "No"
+                        }
+                    ]
+                },
+                {
+                    "type": "tagbox",
+                    "name": "question 16",
+                    "visibleIf": "{question 15} = \"1\"",
+                    "title": "What brands is your set-top box?",
+                    "isRequired": true,
+                    "choices": [
+                        "Gotv",
+                        "StartTtimes",
+                        "Dstv",
+                        "Zuku",
+                        "Bamba",
+                        "Azam",
+                        "Sonar",
+                        "Safaricom Digital Box",
+                        "Wegasonic",
+                        "Don't know",
+                        "mkopa",
+                        "skylife",
+                        "Hotpoint",
+                        "Crystal",
+                        "Kwese",
+                        "Sacantech",
+                        "Skylite",
+                        "BigBox",
+                        "Skyline",
+                        "Superbox",
+                        "Signet",
+                        "GoldenStar",
+                        "Etone",
+                        "Premier",
+                        "Amaco",
+                        "Sony",
+                        "LuckyStar",
+                        "Smart Decoder",
+                        "panasonic",
+                        "Euro Star",
+                        "Nico",
+                        "Galax",
+                        "GLD",
+                        "Strong",
+                        "Home Star",
+                        "Microvile",
+                        "Newstar",
+                        "Zena",
+                        "HTC",
+                        "Inbox",
+                        "Hazan",
+                        "Cronos",
+                        "Sayona",
+                        "Technosat",
+                        "Wegasonic",
+                        "phelistar",
+                        "Does not own"
+                    ]
+                },
+                {
+                    "type": "tagbox",
+                    "name": "question2",
+                    "title": "What brand of your set-top box do you use most often?",
+                    "isRequired": true,
+                    "choices": [
+                        "Gotv",
+                        "StartTtimes",
+                        "Dstv",
+                        "Zuku",
+                        "Bamba",
+                        "Azam",
+                        "Sonar",
+                        "Safaricom Digital Box",
+                        "Wegasonic",
+                        "Don't know",
+                        "mkopa",
+                        "skylife",
+                        "Hotpoint",
+                        "Crystal",
+                        "Kwese",
+                        "Sacantech",
+                        "Skylite",
+                        "BigBox",
+                        "Skyline",
+                        "Superbox",
+                        "Signet",
+                        "GoldenStar",
+                        "Etone",
+                        "Premier",
+                        "Amaco",
+                        "Sony",
+                        "LuckyStar",
+                        "Smart Decoder",
+                        "panasonic",
+                        "Euro Star",
+                        "Nico",
+                        "Galax",
+                        "GLD",
+                        "Strong",
+                        "Home Star",
+                        "Microvile",
+                        "Newstar",
+                        "Zena",
+                        "HTC",
+                        "Inbox",
+                        "Hazan",
+                        "Cronos",
+                        "Sayona",
+                        "Technosat",
+                        "Wegasonic",
+                        "phelistar",
+                        "Does not own"
+                    ]
+                },
+                {
+                    "type": "tagbox",
+                    "name": "question 18",
+                    "visibleIf": "{question 14} = \"1\"",
+                    "title": "Do you have a digital television?",
+                    "isRequired": true,
+                    "choices": [
+                        {
+                            "value": "1",
+                            "text": "Yes"
+                        },
+                        {
+                            "value": "0",
+                            "text": "No"
+                        }
+                    ]
+                }
+            ]
+        }
+    ],
+    "triggers": [
+        {
+            "type": "complete"
+        }
+    ]
+}
