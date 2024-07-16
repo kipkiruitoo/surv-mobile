@@ -1,19 +1,24 @@
+import 'package:uuid/uuid.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:research_package/research_package.dart';
 import 'package:surve/models/question.dart';
+
+import '../models/choice.dart';
 
 class SurveyBuilder {
   final input;
   Function resultCallback;
   Function cancelCallBack;
 
-  SurveyBuilder({this.input, this.resultCallback, this.cancelCallBack});
+  SurveyBuilder(
+      {this.input, required this.resultCallback, required this.cancelCallBack});
 
   Future<Widget> buildSurvey() async {
     RPOrderedTask linearSurveyTask = buildSurveyTask();
-
+    var uuid = Uuid();
     // return Container();
     return RPUITask(
+      key: Key(uuid.v4().toString()),
       task: linearSurveyTask,
       onSubmit: (result) {
         resultCallback(result);
@@ -25,27 +30,33 @@ class SurveyBuilder {
   }
 
   RPOrderedTask buildSurveyTask() {
+    var uuid = Uuid();
     List questions = extractQuestions();
     // print(questions);
     List<RPStep> questiontasks = [];
 
-    RPInstructionStep instructionStep = RPInstructionStep("instructionID",
-        title: "Welcome!", detailText: "For the sake of science of course...")
-      ..text =
-          "Please fill out this questionnaire!\n\nIn this questionnaire the questions will come after each other in a given order. You still have the chance to skip a some of them though.";
+    RPInstructionStep instructionStep = RPInstructionStep(
+        identifier: "instructionID",
+        title: "Welcome!",
+        footnote: "(1) Important footnote",
+        text:
+            "Please fill out this questionnaire!\n\nIn this questionnaire the questions will come after each other in a given order. You still have the chance to skip a some of them though.",
+        detailText: "For the sake of science of course...");
 
     List<RPStep> surveytasks = [];
     int i = 0;
     RPTextAnswerFormat textAnswerFormat =
         RPTextAnswerFormat(hintText: "Write your answer here");
 
-    RPCompletionStep completionStep = RPCompletionStep("completionID")
-      ..title = "Finished"
-      ..text = "Thank you for filling out the survey!";
+    RPCompletionStep completionStep = RPCompletionStep(
+        identifier: "completionID",
+        title: "Finished",
+        text: "Thank you for filling out the survey!");
 
     for (Question question in questions) {
       // will transllate different question types here
-      RPQuestionStep surveytask = RPQuestionStep('q${i.toString()}ID',
+      RPQuestionStep surveytask = RPQuestionStep(
+          identifier: 'q${i.toString()}ID',
           title: question.title,
           answerFormat: textAnswerFormat,
           optional: false);
@@ -61,8 +72,8 @@ class SurveyBuilder {
     questiontasks.add(completionStep);
 
     return RPOrderedTask(
-      "surveyTaskID",
-      questiontasks,
+      identifier: "survey1",
+      steps: questiontasks,
     );
   }
 
@@ -104,8 +115,11 @@ class SurveyBuilder {
               title: title,
               choices: choices);
         } else {
-          question = new Question(
-              type: element['type'], name: element['name'], title: title);
+          question = Question(
+              type: element['type'],
+              name: element['name'],
+              choices: [],
+              title: title);
         }
 
         questions.add(question);

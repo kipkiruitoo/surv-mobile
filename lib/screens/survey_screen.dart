@@ -6,17 +6,12 @@ import 'package:research_package/research_package.dart';
 
 import '../utils/survey_builder.dart';
 
-
-
 class SurveyScreen extends StatefulWidget {
   @override
   _SurveyScreenState createState() => _SurveyScreenState();
 }
 
 class _SurveyScreenState extends State<SurveyScreen> {
-  // initialize the survey builder
-  late SurveyBuilder surveyBuilder;
-
   String _encode(Object object) =>
       const JsonEncoder.withIndent(' ').convert(object);
 
@@ -34,7 +29,7 @@ class _SurveyScreenState extends State<SurveyScreen> {
   Future<Widget> processSurveyJson() async {
     final String response = await rootBundle.loadString('assets/sample.json');
     final data = await json.decode(response);
-    surveyBuilder = new SurveyBuilder(
+    SurveyBuilder surveyBuilder = new SurveyBuilder(
         input: data,
         resultCallback: resultCallback,
         cancelCallBack: cancelCallBack);
@@ -59,21 +54,17 @@ class _SurveyScreenState extends State<SurveyScreen> {
         MediaQuery.of(context).platformBrightness == Brightness.dark;
     return Scaffold(
       appBar: new AppBar(
-        title: Text("Sample SurveyJS Survey"),
+        title: Text("Survey"),
         centerTitle: true,
       ),
       body: FutureBuilder<Widget>(
           future: processSurveyJson(),
           builder: (BuildContext context, AsyncSnapshot<Widget> snapshot) {
             if (snapshot.hasData) {
-              return ListView(
-                children: [
-                  Container(
-                    child: snapshot.data,
-                    height: MediaQuery.of(context).size.height,
-                    width: MediaQuery.of(context).size.width * 1.5,
-                  )
-                ],
+              return Container(
+                child: snapshot.data,
+                height: MediaQuery.of(context).size.height,
+                width: MediaQuery.of(context).size.width * 1.5,
               );
             } else if (snapshot.hasError) {
               return Padding(

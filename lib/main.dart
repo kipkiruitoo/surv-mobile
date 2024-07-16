@@ -3,7 +3,6 @@ import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:research_package/research_package.dart';
 import 'package:surve/screens/survey_screen.dart';
 
-
 void main() {
   runApp(MyApp());
 }
@@ -12,7 +11,6 @@ class MyApp extends StatelessWidget {
   // This widget is the root of your application.
   @override
   Widget build(BuildContext context) {
-
     return MaterialApp(
       supportedLocales: [
         Locale('en'),
@@ -43,10 +41,11 @@ class MyApp extends StatelessWidget {
         // from the list (English, in this case).
         return supportedLocales.first;
       },
-     
-      theme: ThemeData.light().copyWith(backgroundColor: Colors.white),
+
+      theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
       home: SurveyScreen(),
+      debugShowCheckedModeBanner: false,
     );
   }
 }
