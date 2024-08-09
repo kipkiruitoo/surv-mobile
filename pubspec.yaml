@@ -37,6 +37,11 @@ dependencies:
   research_package: ^1.5.1
   flutter_localization: ^0.2.0
   uuid: ^4.4.2
+  toast: ^0.3.0
+  cached_network_image: ^3.4.0
+  timeago: ^3.7.0
+  flutter_inappwebview: ^6.0.0
+  shared_preferences: ^2.3.1
 
 dev_dependencies:
   flutter_test:

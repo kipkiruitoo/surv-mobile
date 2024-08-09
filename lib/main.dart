@@ -1,10 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_localizations/flutter_localizations.dart';
 import 'package:research_package/research_package.dart';
+import 'package:shared_preferences/shared_preferences.dart';
+import 'package:surve/screens/login.dart';
+import 'package:surve/screens/projects.dart';
+import 'package:surve/screens/survey.dart';
 import 'package:surve/screens/survey_screen.dart';
 
+import 'screens/surveys.dart';
+
 void main() {
-  runApp(MyApp());
+  WidgetsFlutterBinding.ensureInitialized();
+
+  runApp(
+    MyApp(),
+  );
 }
 
 class MyApp extends StatelessWidget {
@@ -42,10 +52,62 @@ class MyApp extends StatelessWidget {
         return supportedLocales.first;
       },
 
+      routes: {
+        '/': (context) => CheckAuth(),
+        '/login': (context) => Login(),
+        '/projects': (context) => ProjectsScreen(),
+        '/surveys': (context) => NewSurveys(),
+        '/survey': (context) => SurveyInstance(),
+      },
+
       theme: ThemeData.light(),
       darkTheme: ThemeData.dark(),
-      home: SurveyScreen(),
       debugShowCheckedModeBanner: false,
+    );
+  }
+}
+
+class CheckAuth extends StatefulWidget {
+  @override
+  _CheckAuthState createState() => _CheckAuthState();
+}
+
+class _CheckAuthState extends State<CheckAuth> {
+  bool isAuth = true;
+  @override
+  void initState() {
+    _checkIfLoggedIn();
+    super.initState();
+  }
+
+  void _checkIfLoggedIn() async {
+    SharedPreferences localStorage = await SharedPreferences.getInstance();
+    var token = localStorage.getString('token');
+    if (token != null) {
+      setState(() {
+        isAuth = true;
+      });
+
+      Navigator.pushReplacement(
+          context,
+          MaterialPageRoute(
+              builder: (BuildContext context) => ProjectsScreen()));
+    } else {
+      Navigator.pushReplacement(context,
+          MaterialPageRoute(builder: (BuildContext context) => Login()));
+    }
+  }
+
+  @override
+  Widget build(BuildContext context) {
+    Widget child;
+    if (isAuth) {
+      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Project()));
+    } else {
+      // Navigator.pushReplacement(context, MaterialPageRoute(builder: (BuildContext context) => Project()));
+    }
+    return Scaffold(
+      body: Center(child: CircularProgressIndicator()),
     );
   }
 }

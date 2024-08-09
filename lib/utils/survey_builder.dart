@@ -55,7 +55,7 @@ class SurveyBuilder {
 
     for (Question question in questions) {
       // will transllate different question types here
-      if (question.type == "checkbox") {
+      if (question.type == "checkbox" || question.type == "tagbox") {
         // choices
         List<RPChoice> choices = question.choices
             .map((choice) =>
@@ -122,7 +122,7 @@ class SurveyBuilder {
   List extractQuestions() {
     Map<String, dynamic> surveyJson = input;
 
-    print(surveyJson.runtimeType);
+    // print(surveyJson.runtimeType);
     // print();
 
     List pages = surveyJson['pages'];
@@ -134,7 +134,6 @@ class SurveyBuilder {
       // print(elements);
 
       for (Map<String, dynamic> element in elements) {
-        List<Choice> choices = [];
         String title;
         if (element['title'] is String) {
           title = element['title'];
@@ -148,8 +147,9 @@ class SurveyBuilder {
             // element['type'] == 'tagbox' ||
             element['type'] == 'checkbox' ||
             element['type'] == 'dropdown') {
+          List<Choice> choices = [];
           for (var item in element['choices']) {
-            print(item);
+            // print(item);
             Choice choice =
                 new Choice(value: item['value'], text: item['text']);
             choices.add(choice);
@@ -159,15 +159,48 @@ class SurveyBuilder {
               name: element['name'],
               title: title,
               choices: choices);
-        } else {
+          questions.add(question);
+        } else if (element['type'] == 'tagbox') {
+          List<Choice> choices = [];
+          if (element.containsKey('choices')) {
+            for (item in element['choices']) {
+              if (item.runtimeType != String && item.containsKey('value')) {
+                Choice choice =
+                    new Choice(value: item['value'], text: item['text']);
+                choices.add(choice);
+              } else {
+                Choice choice = new Choice(
+                    value: element['choices'].indexOf(item).toString(),
+                    text: item);
+                choices.add(choice);
+              }
+            }
+          }
+
+          question = Question(
+              type: element['type'],
+              name: element['name'],
+              choices: choices,
+              title: title);
+
+          questions.add(question);
+        } else if (element['type'] == 'rating') {
           question = Question(
               type: element['type'],
               name: element['name'],
               choices: [],
               title: title);
-        }
 
-        questions.add(question);
+          questions.add(question);
+        } else if (element['type'] == '' || element['type'] == 'text') {
+          question = Question(
+              type: element['type'],
+              name: element['name'],
+              choices: [],
+              title: title);
+
+          questions.add(question);
+        }
       }
     }
 

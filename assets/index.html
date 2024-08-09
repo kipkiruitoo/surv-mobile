@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <title>Survey</title>
+    <meta name="viewport" content="width=device-width" />
+    <script src="./jquery.js"></script>
+    <script src="./survey.jquery.js"></script>
+    <link href="./modern.css" type="text/css" rel="stylesheet" />
+</head>
+
+<body>
+    <div id="surveyElement"></div>
+    <div id="surveyResult"></div>
+    <script>
+        var defaultThemeColors = Survey.StylesManager.ThemeColors["modern"];
+
+        Survey.StylesManager.applyTheme("modern");
+        var json = {};
+        window.addEventListener("flutterInAppWebViewPlatformReady", function (
+            event
+        ) {
+            window.flutter_inappwebview
+                .callHandler("passJson")
+                .then(function (result) {
+                    console.log(JSON.stringify(result));
+                    json = result.json;
+                    window.survey = new Survey.Model(json);
+                    survey.onComplete.add(function (result) {
+                        document.querySelector("#surveyResult").textContent =
+                            "Result JSON:\n" + JSON.stringify(result.data, null, 3);
+                    });
+                    $("#surveyElement").Survey({ model: survey });
+                    survey.onComplete.add(function (sender, options) {
+                        // console.log(JSON.stringify(sender.data));
+                        window.flutter_inappwebview
+                            .callHandler("getJsonResults", sender.data)
+                            .then(() => {
+                                return JSON.stringify(sender.data);
+                            });
+                    });
+                });
+        });
+    </script>
+</body>
+
+</html>
