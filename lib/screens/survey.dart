@@ -13,8 +13,8 @@ import 'package:surve/services/survey_service.dart';
 
 class SurveyInstance extends StatefulWidget {
   final String? slug, name;
-  final int? id;
-  final int? project;
+  final String? id;
+  final String? project;
   String? html;
   Map<dynamic, dynamic>? json;
 

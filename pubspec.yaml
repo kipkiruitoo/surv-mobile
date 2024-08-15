@@ -69,6 +69,11 @@ flutter:
     - assets/sample.json
     - assets/lang/da.json
     - assets/lang/en.json
+    - assets/logo.png
+    - assets/index.html
+    - assets/modern.css
+    - assets/jquery.js
+    - assets/survey.jquery.js
 
   # An image asset can refer to one or more resolution-specific "variants", see
   # https://flutter.dev/assets-and-images/#resolution-aware

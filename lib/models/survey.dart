@@ -1,6 +1,6 @@
 class Survey {
-  int id;
-  int project;
+  String id;
+  String project;
   String name;
   String slug;
   Map json;

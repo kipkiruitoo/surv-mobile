@@ -6,7 +6,7 @@ import 'package:shared_preferences/shared_preferences.dart';
 class LoginService {
   late String email;
   late String password;
-  final String _url = 'https://recruit.tifaresearch.com/api/v1';
+  final String _url = 'https://fhawxe4zgf.sharedwithexpose.com/api';
   var token;
 
   _getToken() async {

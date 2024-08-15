@@ -18,7 +18,7 @@ class NewSurveys extends StatefulWidget {
 
 class _NewSurveysState extends State<NewSurveys> {
   bool _loading = true;
-  List<Survey> surveys = List.empty();
+  List<Survey> surveys = List.empty(growable: true);
   @override
   void initState() {
     // TODO: implement initState
@@ -33,7 +33,8 @@ class _NewSurveysState extends State<NewSurveys> {
     var res = await SurveyService().getData("/surveys/${widget.projectId}");
     var body = json.decode(res.body);
 
-    if (body["success"]) {
+    print(body);
+    if (body["surveys"].toString().isNotEmpty) {
       var survey_list = body["surveys"];
 
       print(survey_list[0]);
@@ -43,14 +44,12 @@ class _NewSurveysState extends State<NewSurveys> {
       // print(projects);
       survey_list.forEach((element) {
         Survey survey = new Survey(
-            json: element["json"],
+            json: element["json"].runtimeType == Null ? {} : element["json"],
             name: element["name"],
             id: element["id"],
-            project: element["project"],
+            project: element["project_id"],
             slug: element["slug"]);
         setState(() {
-          surveys.add(survey);
-          surveys.add(survey);
           surveys.add(survey);
         });
       });

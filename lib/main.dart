@@ -91,7 +91,9 @@ class _CheckAuthState extends State<CheckAuth> {
       Navigator.pushReplacement(
           context,
           MaterialPageRoute(
-              builder: (BuildContext context) => ProjectsScreen()));
+              builder: (BuildContext context) => ProjectsScreen(
+                    token: token,
+                  )));
     } else {
       Navigator.pushReplacement(context,
           MaterialPageRoute(builder: (BuildContext context) => Login()));

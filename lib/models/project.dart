@@ -1,5 +1,5 @@
 class Project {
-  int id;
+  String id;
   String name;
   DateTime start_date, end_date;
 

@@ -26,6 +26,11 @@ class _LoginState extends State<Login> {
     Toast.show(msg, duration: 2, gravity: 0);
   }
 
+  @override
+  void initState() {
+    super.initState();
+  }
+
   void login() async {
     setState(() {
       _isLoading = true;
@@ -37,16 +42,19 @@ class _LoginState extends State<Login> {
 
     // print(data);
 
-    var res = await LoginService().login(data, '/login');
+    var res = await LoginService().login(data, 'login');
     var body = json.decode(res.body);
     // print(body);
-    if (body['success']) {
+    if (body['token'].toString().isNotEmpty) {
       SharedPreferences localStorage = await SharedPreferences.getInstance();
       localStorage.setString('token', json.encode(body['token']));
       localStorage.setString('user', json.encode(body['user']));
       Navigator.push(
         context,
-        new MaterialPageRoute(builder: (context) => ProjectsScreen()),
+        new MaterialPageRoute(
+            builder: (context) => ProjectsScreen(
+                  token: body['token'],
+                )),
       );
     } else {
       _showMsg(body['message']);
@@ -59,6 +67,7 @@ class _LoginState extends State<Login> {
 
   @override
   Widget build(BuildContext context) {
+    ToastContext().init(context);
     return Scaffold(
       resizeToAvoidBottomInset: false,
       body: Column(

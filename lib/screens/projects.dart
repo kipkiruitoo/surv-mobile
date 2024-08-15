@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:convert';
 import 'package:intl/intl.dart';
 import 'package:cached_network_image/cached_network_image.dart';
+import 'package:shared_preferences/shared_preferences.dart';
 import 'package:surve/helpers/drawer.dart';
 import 'package:surve/models/project.dart';
 import 'package:surve/screens/surveys.dart';
@@ -12,19 +13,26 @@ import 'package:surve/services/project_service.dart';
 import 'package:timeago/timeago.dart' as timeago;
 
 class ProjectsScreen extends StatefulWidget {
+  String? token;
+
+  ProjectsScreen({this.token});
+
   @override
   _ProjectsScreenState createState() => _ProjectsScreenState();
 }
 
 class _ProjectsScreenState extends State<ProjectsScreen> {
   bool _loading = true;
-  List<Project> projects = List.empty();
+
+  List<Project> projects = List.empty(growable: true);
 
   Future<void> getProjects() async {
-    var res = await ProjectService().getData("/projects");
+    var res = await ProjectService().getData("/projects", widget.token);
     var body = json.decode(res.body);
 
-    if (body["success"]) {
+    print(body);
+
+    if (body["projects"].toString().isNotEmpty) {
       var project_list = body["projects"];
       // print(projects);
       print(project_list[0]);
@@ -33,12 +41,8 @@ class _ProjectsScreenState extends State<ProjectsScreen> {
             name: element["name"],
             start_date: DateTime.parse(element["start_date"]),
             end_date: DateTime.parse(element["end_date"]),
-            id: element["project_id"]);
+            id: element["uuid"]);
         setState(() {
-          projects.add(project);
-          projects.add(project);
-          projects.add(project);
-          projects.add(project);
           projects.add(project);
         });
       });
